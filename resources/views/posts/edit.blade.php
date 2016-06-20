@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="row">
-        {!! Form::model($post, ['route' => ['posts.update', $post->id], "method" => "PUT"]) !!}
+        {!! Form::model($post, ['route' => ['posts.update', $post->id], "method" => "PUT", 'enctype' => 'multipart/form-data']) !!}
             <div class="col-md-8">
 
                 {{ Form::label('title', 'Title:') }}
@@ -14,6 +14,9 @@
 
                 {{ Form::label('category_id', 'Category:') }}
                 {{ Form::select('category_id', $categories, null, ['class' => 'form-control input-lg']) }}
+
+                {{ Form::label('image', 'Image(only .jpg extension):') }}
+                {{ Form::file('image', array('class' => 'form-control input-lg')) }}
 
                 {{ Form::label('body', 'Body') }}
                 {{ Form::textarea('body', null, ['class' => 'form-control']) }}

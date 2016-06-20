@@ -139,11 +139,32 @@ class PostController extends Controller
             ));
         }
 
-        $post->title = $request->input('title');
-        $post->slug = $request->input('slug');
-        $post->category_id = $request->input('category_id');
-        $post->body = $request->input('body');
-        $post->save();
+        if($request->file('image')){
+            Storage::delete($post->image);
+
+            $post->title = $request->input('title');
+            $post->slug = $request->input('slug');
+            $post->category_id = $request->input('category_id');
+            $post->body = $request->input('body');
+
+            $url = 'images/'.$post->slug.'.jpg';
+
+            Storage::put(
+                $url,
+                file_get_contents($request->file('image')->getRealPath())
+            );
+
+            $post->image = $url;
+
+            $post->save();
+        }
+        else{
+            $post->title = $request->input('title');
+            $post->slug = $request->input('slug');
+            $post->category_id = $request->input('category_id');
+            $post->body = $request->input('body');
+            $post->save();
+        }
 
         Session::flash('success', 'The blog post was successfully updated!');
 
@@ -160,6 +181,8 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $post->delete();
+
+        Storage::delete($post->image);
 
         Session::flash('success', 'The blog post was successfully deleted!');
 
