@@ -23,6 +23,8 @@
                     @endforeach
                 </select>
 
+                {{ Form::hidden('user_id', Auth::user()->id) }}
+
                 {{ Form::label('body', 'Post Body:') }}
                 {{ Form::textarea('body', null, array('class' => 'form-control', 'required' => '')) }}
 

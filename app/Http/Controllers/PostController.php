@@ -64,6 +64,7 @@ class PostController extends Controller
         $post->slug = $request->slug;
         $post->category_id = $request->category_id;
         $post->body = $request->body;
+        $post->user_id = $request->user_id;
         $post->save();
 
         Session::flash('success', 'The blog post was successfully saved!');

@@ -32,7 +32,12 @@
                             <th>{{ $post->title }}</th>
                             <th>{{ substr($post->body, 0, 50) }} {{ strlen($post->body) > 50 ? "..." : "" }}</th>
                             <th>{{ date('j M Y H:i', strtotime($post->created_at)) }}</th>
-                            <th><a href="{{ route('posts.show', $post->id) }}" class="btn btn-success">View</a> <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning">Edit</a></th>
+                            <th>
+                                <a href="{{ route('posts.show', $post->id) }}" class="btn btn-success">View</a>
+                                @if($post->user_id == Auth::user()->id)
+                                    <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning">Edit</a>
+                                @endif
+                            </th>
                         </tr>
                     @endforeach
                 </tbody>
