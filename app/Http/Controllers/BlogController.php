@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -27,6 +28,8 @@ class BlogController extends Controller
     public function getSingle($slug)
     {
         $post = Post::where('slug', '=', $slug)->first();
-        return view('blog.single')->with('post', $post);
+        $comments = Comment::where('post_id', '=', $post->id)->get();
+        return view('blog.single')->with('post', $post)->with('comments', $comments);
     }
+
 }

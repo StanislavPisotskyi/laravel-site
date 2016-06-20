@@ -52,3 +52,7 @@ Route::post('password/reset', 'Auth\PasswordController@reset');
 //Categories
 
 Route::resource('categories', 'CategoryController', ['except' => ['create']]);
+
+//Comments
+
+Route::resource('comments', 'CommentsController');

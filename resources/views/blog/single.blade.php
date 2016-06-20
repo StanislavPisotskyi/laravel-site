@@ -10,4 +10,33 @@
             <p><span style="color: #2ca02c; font-weight: bold;">Category: </span>{{ $post->category->name }}</p>
         </div>
     </div>
+    <div class="row">
+        @foreach($comments as $comment)
+            <div class="col-md-8 col-md-offset-2">
+                <p><b>Author: </b>{{ $comment->users->name }}</p>
+                <p>{{ $comment->body }}</p>
+                <p><b>Created At: </b>{{ $comment->created_at }}</p>
+                <p><b>Updated At: </b>{{ $comment->updated_at }}</p>
+                <hr>
+            </div>
+        @endforeach
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            {!! Form::open(array('route' => 'comments.store', 'data-parsley-validate' => '')) !!}
+
+            {{ Form::label('body', 'Type Your Comment:') }}
+            {{ Form::textarea('body', null, array('class' => 'form-control', 'required' => '')) }}
+
+            {{ Form::hidden('user_id', Auth::user()->id) }}
+
+            {{ Form::hidden('post_id', $post->id) }}
+
+            {{ Form::hidden('post_slug', $post->slug) }}
+
+            {{ Form::submit('Create New Comment', array('class' => 'btn btn-success btn-lg btn-block', 'style' => 'margin-top: 20px;')) }}
+
+            {!! Form::close() !!}
+        </div>
+    </div>
 @endsection
