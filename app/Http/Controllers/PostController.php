@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 use Session;
+use Storage;
 
 
 class PostController extends Controller
@@ -65,6 +66,15 @@ class PostController extends Controller
         $post->category_id = $request->category_id;
         $post->body = $request->body;
         $post->user_id = $request->user_id;
+
+        $url = 'images/'.$post->slug.'.jpg';
+
+        Storage::put(
+            $url,
+            file_get_contents($request->file('image')->getRealPath())
+        );
+
+        $post->image = $url;
         $post->save();
 
         Session::flash('success', 'The blog post was successfully saved!');
