@@ -32,4 +32,11 @@ class BlogController extends Controller
         return view('blog.single')->with('post', $post)->with('comments', $comments);
     }
 
+    public function getWall($id)
+    {
+        $posts = Post::where('user_id', '=', $id)->get();
+
+        return view('blog.wall')->with('posts', $posts);
+    }
+
 }

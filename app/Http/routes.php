@@ -27,6 +27,8 @@ Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getS
 
 Route::get('blog', ['uses' => 'BlogController@getIndex', 'as' => 'blog.index']);
 
+Route::get('wall/{id}', [ 'uses' => 'BlogController@getWall', 'as' => 'blog.wall']);
+
 //Auth
 
 Route::get('auth/login', ['as' => 'login', 'uses' => 'Auth\AuthController@getLogin']);

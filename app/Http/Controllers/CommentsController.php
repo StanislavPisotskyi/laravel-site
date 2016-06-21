@@ -72,7 +72,9 @@ class CommentsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $comment = Comment::find($id);
+
+        return view('comments.edit')->with('comment', $comment);
     }
 
     /**
@@ -84,7 +86,18 @@ class CommentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $comment = Comment::find($id);
+
+        $this->validate($request, array(
+            'body' => 'required'
+        ));
+
+        $comment->body = $request->body;
+        $comment->save();
+
+        Session::flash('success', 'The comment was successfully edited!');
+
+        return redirect()->back();
     }
 
     /**
@@ -95,6 +108,11 @@ class CommentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment = Comment::find($id);
+        $comment->delete();
+
+        Session::flash('success', 'The comment was successfully deleted!');
+
+        return redirect()->back();
     }
 }
