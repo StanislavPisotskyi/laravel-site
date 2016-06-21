@@ -1,10 +1,10 @@
 @extends('main')
-@section('title', ' - Wall')
+@section('title', ' - Popular')
 
 @section('content')
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <h1>My Wall</h1>
+            <h1>Popular Posts</h1>
         </div>
     </div>
 

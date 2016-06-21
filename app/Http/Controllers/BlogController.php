@@ -34,9 +34,16 @@ class BlogController extends Controller
 
     public function getWall($id)
     {
-        $posts = Post::where('user_id', '=', $id)->get();
+        $posts = Post::where('user_id', '=', $id)->get()->reverse();
 
         return view('blog.wall')->with('posts', $posts);
+    }
+
+    public function getPopular()
+    {
+        $posts = Post::where('comments_counter', '>', 5)->get()->reverse();
+
+        return view('blog.popular')->with('posts', $posts);
     }
 
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Post;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -41,6 +42,10 @@ class CommentsController extends Controller
         $this->validate($request, array(
             'body' => 'required'
         ));
+
+        $post = Post::where('id', '=', $request->post_id)->first();
+        $post->comments_counter++;
+        $post->save();
 
         $comment = new Comment();
         $comment->body = $request->body;

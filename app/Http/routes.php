@@ -27,7 +27,9 @@ Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getS
 
 Route::get('blog', ['uses' => 'BlogController@getIndex', 'as' => 'blog.index']);
 
-Route::get('wall/{id}', [ 'uses' => 'BlogController@getWall', 'as' => 'blog.wall']);
+Route::get('wall/{id}', [ 'uses' => 'BlogController@getWall', 'as' => 'wall']);
+
+Route::get('popular', [ 'uses' => 'BlogController@getPopular', 'as' => 'popular']);
 
 //Auth
 

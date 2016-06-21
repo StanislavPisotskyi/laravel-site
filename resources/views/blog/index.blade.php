@@ -15,6 +15,7 @@
             <h5>{{ date('j M Y H:i', strtotime($post->created_at)) }}</h5>
             <p><img src="{{ asset($post->image) }}"  width="700" height="500"/></p>
             <p>{{ substr($post->body, 0, 50) }} {{ strlen($post->body) > 50 ? "..." : "" }}</p>
+            <p><b>Comments: </b>{{ $post->comments_counter }}</p>
             <a href="{{ route('blog.single', $post->slug) }}" class="btn btn-success">Read More...</a>
             <hr>
         </div>
