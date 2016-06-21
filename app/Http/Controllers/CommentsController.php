@@ -116,6 +116,10 @@ class CommentsController extends Controller
         $comment = Comment::find($id);
         $comment->delete();
 
+        $post = Post::where('id', '=', $comment->post_id)->first();
+        $post->comments_counter--;
+        $post->save();
+
         Session::flash('success', 'The comment was successfully deleted!');
 
         return redirect()->back();

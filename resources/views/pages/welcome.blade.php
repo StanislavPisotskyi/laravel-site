@@ -5,7 +5,7 @@
                 <div class="jumbotron">
                     <h1>Welcome to My Blog!</h1>
                     <p class="lead">Thnk you so much for visiting!</p>
-                    <p><a class="btn btn-success btn-lg" href="#" role="button">Popular Posts</a></p>
+                    <p><a class="btn btn-success btn-lg" href="{{ route('popular') }}" role="button">Popular Posts</a></p>
                 </div>
             </div>
         </div>
